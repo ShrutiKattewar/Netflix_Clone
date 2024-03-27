@@ -1,0 +1,65 @@
+<!-- <app-header></app-header> -->
+<div>
+  <i
+    (click)="goBack()"
+    class="fa fa-arrow-left ms-12 my-2 p-1 cursor-pointer"
+    aria-hidden="true"
+  ></i>
+</div>
+<div class="h-[97vh] flex flex-row ms-12 me-5 mt-1">
+  <img class="h-full" [src]="details.poster_path | imagePipe" alt="" />
+  <div class="ms-6 grid content-between">
+    <div>
+      <h1 class="text-5xl">{{ details.title }}</h1>
+      <div class="m-[0.5rem]">
+        <span class="text-green-500 text-base">{{
+          details.vote_average | vote
+        }}</span>
+        <span class="text-base ms-6">{{ details.release_date | year }}</span>
+        <span class="text-base ms-6">{{ details.runtime | rumtime }}</span>
+      </div>
+      <div class="m-4 text-base">
+        {{ details.overview | description : 300 }}
+      </div>
+      <div class="m-4 text-base">
+        <button
+          class="border-solid border-red-600 border py-1 px-5 bg-red-600 text-white"
+        >
+          <i class="pe-3 fa fa-play" aria-hidden="true"></i>Play
+        </button>
+        <button class="border-solid border-white border py-1 px-5 ms-4">
+          <i class="pe-3 fa fa-plus" aria-hidden="true"></i>My List
+        </button>
+        <button class="ms-16 border border-white rounded-full">
+          <i class="p-2 fa fa-thumbs-up"></i>
+        </button>
+        <button class="ms-2 border border-white rounded-full">
+          <i class="p-2 fa fa-thumbs-down"></i>
+        </button>
+      </div>
+
+      <div class="mt-2 ms-4">
+        Cast:
+        <p class="text-base inline-block" *ngFor="let c of casts">{{ c }},</p>
+      </div>
+      <div class="text-base ms-4">
+        Genres:
+        <p class="inline-block" *ngFor="let g of details.genres">
+          {{ g.name }},
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="text-xl mt-7">More Like This</div>
+      <div class="mt-2 grid grid-cols-5 gap-x-3 cursor-pointer">
+        <div
+          [routerLink]="['/home/movie', item.id]"
+          *ngFor="let item of relatedList"
+        >
+          <img [src]="item.poster_path | imagePipe" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

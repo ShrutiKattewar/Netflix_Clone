@@ -1,0 +1,11 @@
+<div class="m-12 grid grid-cols-5 gap-y-8 gap-x-10">
+  <ng-container *ngFor="let movie of searchResult | searchImgPipe">
+    <div class="searchImg" [routerLink]="['movie/', movie.id]">
+      <img
+        class="h-[83%] w-full"
+        [src]="movie.poster_path | imagePipe"
+        alt=""
+      />
+    </div>
+  </ng-container>
+</div>

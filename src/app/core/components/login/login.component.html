@@ -1,0 +1,28 @@
+<div [ngClass]="isDivVisible ? 'hidden' : 'visible'" class="main">
+  <div class="content">
+    <div
+      class="flex justify-center items-center flex-col right-0 left-0 absolute bg-transparent my-36 mx-auto text-white"
+    >
+      <h1 class="font-bold text-5xl p-7">
+        Unlimited movies, TV shows and more
+      </h1>
+      <p class="text-2xl pb-4">Watch anywhere. Cancel anytime.</p>
+      <p class="text-xl/8">
+        Ready to watch? Enter your email to create or restart your membership.
+      </p>
+      <div class="p-7" id="google-btn"></div>
+    </div>
+  </div>
+</div>
+
+<div
+  [ngClass]="isDivVisible ? 'visible' : 'hidden'"
+  class="flex justify-center items-center h-[100vh]"
+>
+  <img
+    class="zoom-in-out-box h-40 w-80"
+    src="../../../../assets/images/Netflix_Logo.png"
+    alt=""
+    srcset=""
+  />
+</div>

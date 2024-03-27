@@ -1,0 +1,52 @@
+<header
+  class="h-[68px] z-10 top-0 flex items-center relative justify-between px-10"
+>
+  <div class="flex gap-5">
+    <img
+      width="110"
+      src="../../../../assets/images/Netflix_Logo.png"
+      alt="Netflix_Logo"
+    />
+    <ul class="flex items-center" *ngFor="let item of navList">
+      <li
+        routerLink="/home"
+        class="text-neutral-200 cursor-pointer text-sm font-extralight hover:text-gray-400 transition=[1s]"
+      >
+        {{ item }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="text-white flex items-center gap-6">
+    <div class="searchDiv">
+      <i class="fa fa-search px-2.5 py-1.5"></i>
+      <input
+        #s
+        class="input ps-2"
+        type="text"
+        placeholder="Search"
+        (keyup.enter)="search(s.value)"
+        [value]="searchTerm"
+      />
+    </div>
+    <div><i class="fa fa-bell"></i></div>
+
+    <div>
+      <i class="fa fa-gear"></i>
+    </div>
+    <div class="menu-container">
+      <button (click)="toggleDropdown($event)" #btnDropdownRef>
+        <img class="rounded-full" [src]="userImg" alt="User-img" width="42" />
+      </button>
+      <div
+        class="right-0"
+        #dropdownRef
+        [ngClass]="dropdownPopoverShow ? 'menu' : 'hidden'"
+      >
+        <a class="text-black p-2" routerLink="/profile">Profile</a>
+        <a class="text-black p-2" routerLink="/orders">Orders</a>
+        <a class="text-black p-2" href="/">Sign Out</a>
+      </div>
+    </div>
+  </div>
+</header>

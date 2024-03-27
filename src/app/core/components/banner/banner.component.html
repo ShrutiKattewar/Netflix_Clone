@@ -1,0 +1,29 @@
+<div class="bg-black h-[80vh] flex flex-row items-center mb-24">
+  <iframe
+    #iframe
+    [ngClass]="videoLoaded ? 'opacity-40' : 'opacity-0'"
+    class="w-full h-[120%] absolute pointer-events-none"
+    [src]="key"
+    frameborder="0"
+  ></iframe>
+
+  <div class="dov ps-10 pt-56 mr-[-20px] w-1/2">
+    <h1 class="text-[50px] leading-[50px] font-bold">
+      {{ bannerTitle | title }}
+    </h1>
+    <p class="inline-block pt-5 pb-6 text-lg flex-wrap">
+      {{ bannerOverview | description }}
+    </p>
+    <button
+      class="bg-white text-black py-2 px-8 text-lg rounded-lg hover:bg-opacity-70 transition-[1s]"
+    >
+      ▶Play
+    </button>
+    <button
+      class="mx-2 bg-gray-500 text-white px-8 py-2 text-lg bg-opacity-50 rounded-lg"
+      [routerLink]="['movie/', bannerId]"
+    >
+      More Info
+    </button>
+  </div>
+</div>

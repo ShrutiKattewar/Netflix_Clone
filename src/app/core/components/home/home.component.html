@@ -1,0 +1,48 @@
+<div>
+  <app-header
+    (searchResult)="searchResult($event)"
+    [userImg]="picture"
+  ></app-header>
+
+  <ng-container *ngIf="!isSearch; else search">
+    <app-banner
+      [bannerTitle]="bannerTitle"
+      [bannerOverview]="bannerOverview"
+      [bannerId]="bannerId"
+      [key]="bannerVideo"
+    ></app-banner>
+
+    <app-movie-carousel
+      [moviesList]="movies"
+      [title]="'Popular on Netflix'"
+    ></app-movie-carousel>
+    <app-movie-carousel
+      [moviesList]="tvShows"
+      [title]="'Trending TV shows'"
+    ></app-movie-carousel>
+    <app-movie-carousel
+      [moviesList]="upcomingMovies"
+      [title]="'Upcoming Movies'"
+    ></app-movie-carousel>
+    <app-movie-carousel
+      [moviesList]="topRatedMovies"
+      [title]="'Top Rated Movies'"
+    ></app-movie-carousel>
+  </ng-container>
+
+  <ng-template #search>
+    <app-search></app-search>
+  </ng-template>
+</div>
+
+<!-- <div
+  [ngClass]="isDivVisible ? 'hidden' : 'visible'"
+  class="flex justify-center items-center h-[100vh]"
+>
+  <img
+    class="zoom-in-out-box h-40 w-80"
+    src="../../../../assets/images/Netflix_Logo.png"
+    alt=""
+    srcset=""
+  />
+</div> -->
