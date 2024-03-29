@@ -21,17 +21,17 @@ export class MovieService implements OnInit {
     },
   };
 
-  private product$ = new BehaviorSubject<boolean>(false);
-  selectedProduct$ = this.product$.asObservable();
+  private search$ = new BehaviorSubject<boolean>(false);
+  ifSearch$ = this.search$.asObservable();
 
-  setProduct(product: any) {
-    this.product$.next(product);
+  setIsSearch(product: any) {
+    this.search$.next(product);
   }
 
   private result$ = new BehaviorSubject<boolean>(false);
   sResult$ = this.result$.asObservable();
 
-  setSresult(product: any) {
+  setSearchResult(product: any) {
     this.result$.next(product);
   }
 
@@ -63,6 +63,12 @@ export class MovieService implements OnInit {
   getBannerVideo(id: number) {
     return this.http.get<any>(
       `https://api.themoviedb.org/3/movie/${id}/videos`,
+      this.options
+    );
+  }
+  getBannerImages(id: number) {
+    return this.http.get<any>(
+      `https://api.themoviedb.org/3/movie/${id}/images`,
       this.options
     );
   }

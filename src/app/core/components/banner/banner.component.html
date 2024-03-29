@@ -1,27 +1,32 @@
-<div class="bg-black h-[80vh] flex flex-row items-center mb-24">
+<div class="bg-black h-[80vh] flex items-center mb-24">
   <iframe
     #iframe
-    [ngClass]="videoLoaded ? 'opacity-40' : 'opacity-0'"
-    class="w-full h-[120%] absolute pointer-events-none"
-    [src]="key"
+    [ngClass]="videoLoaded ? 'opacity-35' : 'opacity-0'"
+    class="w-full h-[116%] absolute pointer-events-none"
+    [src]="bannerVideo"
     frameborder="0"
   ></iframe>
-
-  <div class="dov ps-10 pt-56 mr-[-20px] w-1/2">
+  <img
+    [ngClass]="!videoLoaded ? 'visible' : 'hidden'"
+    class="left-0 right-0 m-auto w-[91vw] h-[90vh] opacity-40 absolute pointer-events-none"
+    [src]="bannerDetails.backdrop_path | imagePipe"
+    alt="Banner Details"
+  />
+  <div class="z-[100] ps-14 pt-56 mr-[-20px] w-1/2">
     <h1 class="text-[50px] leading-[50px] font-bold">
-      {{ bannerTitle | title }}
+      {{ bannerDetails.title }}
     </h1>
     <p class="inline-block pt-5 pb-6 text-lg flex-wrap">
-      {{ bannerOverview | description }}
+      {{ bannerDetails.overview | description }}
     </p>
     <button
-      class="bg-white text-black py-2 px-8 text-lg rounded-lg hover:bg-opacity-70 transition-[1s]"
+      class="bg-white text-black py-2 px-8 font-semibold text-lg rounded-lg hover:bg-opacity-70 transition-[1s]"
     >
-      ▶Play
+      <i class="fa fa-play pe-2" aria-hidden="true"></i>Play
     </button>
     <button
-      class="mx-2 bg-gray-500 text-white px-8 py-2 text-lg bg-opacity-50 rounded-lg"
-      [routerLink]="['movie/', bannerId]"
+      class="mx-2 bg-gray-500 text-white px-8 py-2 font-normal text-lg bg-opacity-50 rounded-lg"
+      [routerLink]="['search/movie', bannerDetails.id]"
     >
       More Info
     </button>

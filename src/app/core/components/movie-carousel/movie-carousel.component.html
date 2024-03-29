@@ -6,7 +6,7 @@
         <div
           (mouseenter)="setHoveredMovie(movie)"
           (mouseleave)="clearHoveredMovie()"
-          [routerLink]="['movie/', movie.id]"
+          [routerLink]="['search/movie/', movie.id]"
           class="swiper-slide relative"
         >
           <img [src]="movie.poster_path | imagePipe" alt="" />
@@ -15,7 +15,7 @@
               movie.title === this.hoveredContent ||
               movie.name === this.hoveredContent
             "
-            class="desc p-2 grid space-evenly"
+            class="desc p-2 grid content-center"
           >
             <span class="text-base flex flex-wrap font-bold">{{
               movie.original_title
@@ -28,10 +28,6 @@
                 <span class="text-green-500"
                   >Vote Average : {{ movie.vote_average }}</span
                 >
-                <i
-                  class="fa fa-2x fa-chevron-circle-down"
-                  aria-hidden="true"
-                ></i>
               </p>
             </div>
           </div>

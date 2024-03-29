@@ -1,4 +1,4 @@
-export interface IVideoContent {
+export interface IMovieContent {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];

@@ -1,10 +1,6 @@
-.menu-container {
-  position: relative;
-}
 .menu {
   position: absolute;
   z-index: 1000;
-  background: whitesmoke;
   display: none;
 }
 
@@ -15,18 +11,4 @@
 .menu a {
   width: 100%;
   min-width: 8rem;
-}
-
-header {
-  background-color: rgb(0 0 0 / 0.8);
-}
-
-.searchDiv {
-  border: solid white 1px;
-}
-
-.searchDiv .input {
-  background-color: black;
-  color: white;
-  outline: none;
 }

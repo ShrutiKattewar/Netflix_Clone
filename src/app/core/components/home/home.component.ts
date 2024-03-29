@@ -1,48 +1,51 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth.service';
-import { IVideoContent } from 'src/app/shared/models/video-content.interface';
+import { IMovieContent } from 'src/app/shared/models/movie-content.interface';
 import { MovieService } from 'src/app/shared/services/movie.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { async, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  styles: [],
 })
 export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private movieService: MovieService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router
   ) {}
 
   isSearch!: boolean;
-  sResult: any;
-  hoveredContent: string | null = null;
 
+  // get logged in user details
   name = JSON.parse(sessionStorage.getItem('loggedInUser')!).name;
   picture = JSON.parse(sessionStorage.getItem('loggedInUser')!).picture;
 
-  movies: IVideoContent[] = [];
-  tvShows: IVideoContent[] = [];
-  topRatedMovies: IVideoContent[] = [];
-  upcomingMovies: IVideoContent[] = [];
+  movies: IMovieContent[] = [];
+  tvShows: IMovieContent[] = [];
+  topRatedMovies: IMovieContent[] = [];
+  upcomingMovies: IMovieContent[] = [];
 
-  bannerTitle: any = '';
+  bannerDetails: any = '';
   bannerVideo: any = '';
-  bannerOverview: any = '';
-  bannerId: any = '';
-  // isDivVisible = false;
 
   ngOnInit(): void {
-    this.getUpdatedData();
-    this.movieService.selectedProduct$.subscribe((res) => {
-      this.isSearch = res;
+    this.getUpdatedData(); //get all movies data
+
+    // if search navigate from home to search page
+    this.movieService.ifSearch$.subscribe((res) => {
+      if (res) {
+        this.router.navigateByUrl('/home/search');
+      }
     });
   }
 
+  // call services to get all data and subscribe
   getUpdatedData() {
     forkJoin(
       this.movieService.getPopularMovies(),
@@ -61,42 +64,38 @@ export class HomeComponent implements OnInit {
         })
       )
       .subscribe((res: any) => {
-        this.movies = res.Movies.results.slice(0, 10) as IVideoContent[];
-        this.bannerTitle = this.movies[0].title;
-        this.bannerOverview = this.movies[0].overview;
-        this.bannerId = this.movies[0].id;
+        this.movies = res.Movies.results.slice(0, 10) as IMovieContent[];
+        this.bannerDetails = this.movies[1]; // get first movie data from movie list
+
         this.movieService
-          .getBannerVideo(this.movies[0].id)
+          .getBannerVideo(this.movies[1].id)
           .subscribe((resp) => {
             resp.results.forEach((element: any) => {
               if (element.type === 'Trailer') {
                 let key = element.key;
                 this.bannerVideo =
                   this.sanitizer.bypassSecurityTrustResourceUrl(
-                    // `https://www.youtube.com/embed/${key}?autoplay=1&mute=1&loop=1&controls=0`
-                    `https://www.youtube.com/embed/${key}?end=10&autoplay=1&mute=1&playlist=${key}&loop=1&controls=0&rel=0&showinfo=0&disablekb=1`
-                  );
+                    `https://www.youtube.com/embed/${key}?start=10&end=40&autoplay=1&mute=1&playlist=${key}&loop=1&controls=0&rel=0&showinfo=0&disablekb=1`
+                  ); // used DOM sanitizer to prevent cross site scripting security bugs
               }
             });
           });
 
-        this.tvShows = res.TvShows.results.slice(0, 10) as IVideoContent[];
+        // filtering first 10 values to show
+        this.tvShows = res.TvShows.results.slice(0, 10) as IMovieContent[];
 
         this.upcomingMovies = res.UpcomingMovies.results.slice(
           0,
           10
-        ) as IVideoContent[];
+        ) as IMovieContent[];
         this.topRatedMovies = res.TopRated.results.slice(
           0,
           10
-        ) as IVideoContent[];
+        ) as IMovieContent[];
       });
   }
 
-  searchResult(res: any) {
-    this.sResult = res;
-  }
-
+  // sign out user
   signOut() {
     sessionStorage.removeItem('loggedInUser');
     this.authService.signOut();

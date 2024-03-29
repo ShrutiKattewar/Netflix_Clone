@@ -4,6 +4,7 @@ import { LoginComponent } from './core/components/login/login.component';
 import { HomeComponent } from './core/components/home/home.component';
 import { MovieComponent } from './core/components/movie/movie.component';
 import { AuthServiceGuard } from './shared/services/auth.guard.service';
+import { SearchComponent } from './core/components/search/search.component';
 
 const routes: Routes = [
   {
@@ -13,10 +14,14 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AuthServiceGuard],
+    // canActivate: [AuthServiceGuard],
   },
   {
-    path: 'home/movie/:id',
+    path: 'home/search',
+    component: SearchComponent,
+  },
+  {
+    path: 'home/search/movie/:id',
     component: MovieComponent,
   },
 ];

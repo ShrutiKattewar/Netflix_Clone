@@ -10,9 +10,12 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  isDivVisible = false;
+
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
+    // google suthentication initizalizations
     google.accounts.id.initialize({
       client_id:
         '123002801606-prv5u3rm4e2kuro9pvc7u83fvpfanbbn.apps.googleusercontent.com',
@@ -32,7 +35,6 @@ export class LoginComponent implements OnInit {
   private decodeToken(token: string) {
     return JSON.parse(atob(token.split('.')[1]));
   }
-  isDivVisible = false;
 
   handleLogin(response: any) {
     if (response) {

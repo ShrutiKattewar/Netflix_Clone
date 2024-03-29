@@ -1,5 +1,12 @@
-<div class="m-12 grid grid-cols-5 gap-y-8 gap-x-10">
-  <ng-container *ngFor="let movie of searchResult | searchImgPipe">
+<div>
+  <i
+    (click)="goBack()"
+    class="fa fa-arrow-left ms-12 my-2 p-1 cursor-pointer"
+    aria-hidden="true"
+  ></i>
+</div>
+<div *ngIf="searchFound" class="m-12 mt-2 grid grid-cols-5 gap-y-8 gap-x-10">
+  <ng-container *ngFor="let movie of searchResult">
     <div class="searchImg" [routerLink]="['movie/', movie.id]">
       <img
         class="h-[83%] w-full"
@@ -8,4 +15,11 @@
       />
     </div>
   </ng-container>
+</div>
+
+<div class="notFoundDiv absolute top-[50%] left-[50%]" *ngIf="!searchFound">
+  <p class="text-2xl text-white">Oh darn. We don't have that</p>
+  <p class="text-lg text-gray-400">
+    Try searching for another movie, show, actor or genre
+  </p>
 </div>

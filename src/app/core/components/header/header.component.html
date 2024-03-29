@@ -1,5 +1,5 @@
 <header
-  class="h-[68px] z-10 top-0 flex items-center relative justify-between px-10"
+  class="bg-black h-[68px] z-10 top-0 flex items-center relative justify-between px-10"
 >
   <div class="flex gap-5">
     <img
@@ -18,11 +18,11 @@
   </div>
 
   <div class="text-white flex items-center gap-6">
-    <div class="searchDiv">
+    <div class="border border-solid border-white">
       <i class="fa fa-search px-2.5 py-1.5"></i>
       <input
         #s
-        class="input ps-2"
+        class="bg-black text-white outline-none ps-2"
         type="text"
         placeholder="Search"
         (keyup.enter)="search(s.value)"
@@ -34,18 +34,31 @@
     <div>
       <i class="fa fa-gear"></i>
     </div>
-    <div class="menu-container">
-      <button (click)="toggleDropdown($event)" #btnDropdownRef>
-        <img class="rounded-full" [src]="userImg" alt="User-img" width="42" />
+    <div class="menu-container relative">
+      <button
+        class="flex items-center"
+        (click)="toggleDropdown()"
+        #btnDropdownRef
+      >
+        <img class="" [src]="userImg" alt="User-img" width="42" />
+        <i class="fa fa-caret-down flex-1 ms-2"></i>
       </button>
       <div
-        class="right-0"
+        class="right-0 bg-black border border-[#5A5A5A] border-solid"
         #dropdownRef
         [ngClass]="dropdownPopoverShow ? 'menu' : 'hidden'"
       >
-        <a class="text-black p-2" routerLink="/profile">Profile</a>
-        <a class="text-black p-2" routerLink="/orders">Orders</a>
-        <a class="text-black p-2" href="/">Sign Out</a>
+        <a
+          class="text-neutral-200 p-2 font-extralight hover:text-gray-400 transition=[1s] cursor-pointer"
+          routerLink="/profile"
+          >Profile</a
+        >
+
+        <a
+          class="text-neutral-200 p-2 font-extralight hover:text-gray-400 transition=[1s] cursor-pointer"
+          href="/"
+          >Sign Out</a
+        >
       </div>
     </div>
   </div>

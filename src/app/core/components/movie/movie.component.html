@@ -1,4 +1,3 @@
-<!-- <app-header></app-header> -->
 <div>
   <i
     (click)="goBack()"
@@ -16,7 +15,7 @@
           details.vote_average | vote
         }}</span>
         <span class="text-base ms-6">{{ details.release_date | year }}</span>
-        <span class="text-base ms-6">{{ details.runtime | rumtime }}</span>
+        <span class="text-base ms-6">{{ details.runtime | runtime }}</span>
       </div>
       <div class="m-4 text-base">
         {{ details.overview | description : 300 }}
@@ -54,7 +53,7 @@
       <div class="text-xl mt-7">More Like This</div>
       <div class="mt-2 grid grid-cols-5 gap-x-3 cursor-pointer">
         <div
-          [routerLink]="['/home/movie', item.id]"
+          [routerLink]="['/home/search/movie', item.id]"
           *ngFor="let item of relatedList"
         >
           <img [src]="item.poster_path | imagePipe" alt="" />

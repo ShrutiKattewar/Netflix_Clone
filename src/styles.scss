@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+//tailwind global css declarations
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+// npm swiper package import
 @import "node_modules/swiper/swiper.scss";
 
 * {

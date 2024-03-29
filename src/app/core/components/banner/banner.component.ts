@@ -1,29 +1,22 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
-  styleUrls: ['./banner.component.scss'],
+  styles: [],
 })
 export class BannerComponent implements OnInit {
-  @Input() bannerTitle = ''; // Required Input
-  @Input() bannerOverview = ''; // Required Input
-  @Input() bannerId = ''; // Required Input
-  @Input() key = '';
+  // get banner details input from home
+  @Input() bannerDetails: any;
+  @Input() bannerVideo = '';
+
   videoLoaded = false;
   constructor() {}
 
   ngOnInit(): void {
+    // show banner image for first 5 sec then banner video
     setTimeout(() => {
       this.videoLoaded = true;
-    }, 2000);
+    }, 5000);
   }
 }

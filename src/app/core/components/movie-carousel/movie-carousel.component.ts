@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import {
   IPosterContent,
-  IVideoContent,
-} from 'src/app/shared/models/video-content.interface';
+  IMovieContent,
+} from 'src/app/shared/models/movie-content.interface';
 import { MovieService } from 'src/app/shared/services/movie.service';
 import Swiper from 'swiper';
 
@@ -18,24 +18,20 @@ import Swiper from 'swiper';
   selector: 'app-movie-carousel',
   templateUrl: './movie-carousel.component.html',
   styleUrls: ['./movie-carousel.component.scss'],
-  animations: [
-    trigger('fade', [
-      transition('void => *', [
-        style({ opacity: 0 }),
-        animate(400, style({ opacity: 1 })),
-      ]),
-    ]),
-  ],
 })
 export class MovieCarouselComponent implements OnInit, AfterViewInit {
-  @Input() moviesList: IVideoContent[] = [];
+  @Input() moviesList: IMovieContent[] = [];
   @ViewChild('swiperContainer') swiperContainer!: ElementRef;
   @Input() title!: string;
 
   hoveredContent: string | null = null;
-  constructor(private movieService: MovieService) {}
+  poster_details!: IPosterContent;
+
+  constructor() {}
 
   ngOnInit(): void {}
+
+  // swiper package initialization
   ngAfterViewInit(): void {
     this.initSwiper();
   }
@@ -81,8 +77,8 @@ export class MovieCarouselComponent implements OnInit, AfterViewInit {
     });
   }
 
-  poster_details!: IPosterContent;
-  setHoveredMovie(movie: IVideoContent) {
+  // set hovred movie details
+  setHoveredMovie(movie: IMovieContent) {
     this.hoveredContent = movie.title ?? movie.name;
     this.poster_details = {
       title: movie.title,
