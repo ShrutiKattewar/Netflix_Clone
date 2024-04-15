@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    // canActivate: [AuthServiceGuard],
+    canActivate: [AuthServiceGuard],
   },
   {
     path: 'home/search',
